@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Chat</ion-title>
+    <ion-buttons end>
+      <ion-spinner *ngIf="!(chats)"></ion-spinner>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="chat-view" id="chat-view"> 
+ <ion-label>{{myDate}}</ion-label> 
+  <div class="messages">
+      <div *ngFor="let chat of chats | async" >
+            <span class="message" [ngClass]="{'me': uid === chat.from}" *ngIf="chat.message">{{chat.message}}
+              <div>{{myTime}}</div>
+            </span>
+            <img class="message"  [ngClass]="{'me': uid === chat.from}" *ngIf="chat.picture" src="{{chat.picture}}" class="picture">
+            
+      </div>
+  </div>
+</ion-content>
+
+<ion-footer >
+<input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)"/>
+  <ion-toolbar >
+    <ion-row center >
+      <ion-col width-20 [hidden]="!chats">
+      	 <button ion-button clear icon-only style="zoom:1.2;" (click)="openActionSheet()">
+      	   <ion-icon name="add" ></ion-icon> 
+      	 </button>
+      </ion-col>
+      
+      <ion-col width-60 [hidden]="!chats">
+        <ion-item no-lines>
+          <ion-input *ngIf="!picture" type="text"  placeholder="Enter Message"
+             clearInput [(ngModel)]="message">
+          </ion-input>
+        </ion-item>         
+        <button ion-item *ngIf="picture" detail-none >
+          <ion-thumbnail  item-right>
+            <img [src]="picture" />
+          </ion-thumbnail>
+        </button>
+      </ion-col>
+      <ion-col width-20 [hidden]="!chats">
+        <button ion-button icon-only clear (click)="sendMessage()">
+           <ion-icon name="send">
+           </ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>    
+   
+  </ion-toolbar>
+</ion-footer>

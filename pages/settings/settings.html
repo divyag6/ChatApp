@@ -1,0 +1,55 @@
+<!--
+  Generated template for the Settings page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle icon-only left>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>{{ 'SETTINGS_TITLE' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="form" *ngIf="form">
+    <ion-list>
+      <ion-item>
+        <ion-label>{{ 'SETTINGS_OPTION1' | translate }}</ion-label>
+        <ion-label> {{ user.social[socialProvider].data.full_name }} </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>{{ 'SETTINGS_OPTION2' | translate }}</ion-label>
+        <ion-label> {{ user.social[socialProvider].data.email }} </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>{{ 'SETTINGS_OPTION3' | translate }}</ion-label>
+        <ion-input formControlName="phone_no">
+          </ion-input>
+      </ion-item>
+
+	<ion-item>
+        <ion-label>{{ 'SETTINGS_OPTION4' | translate }}</ion-label>
+        <ion-input formControlName="address" >
+          </ion-input>
+      </ion-item>
+	
+	<ion-item>
+	<div padding>
+      <button block ion-button (click)="done()" large color="primary" [disabled]="!isReadyToSave" strong>        
+          {{ 'DONE_BUTTON' | translate }}
+      </button>
+      </div>
+     </ion-item>
+    </ion-list>
+    
+  </form>
+
+</ion-content>

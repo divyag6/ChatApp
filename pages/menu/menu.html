@@ -1,0 +1,11 @@
+<ion-menu side="right" [content]="subContent">
+  <ion-content>
+    <ion-list>
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        {{p.title}}
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #subContent swipeBackEnabled="true"></ion-nav>

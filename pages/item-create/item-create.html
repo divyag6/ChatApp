@@ -1,0 +1,62 @@
+<ion-header>
+
+  <ion-navbar secondary>
+    <ion-title>{{ 'ITEM_CREATE_TITLE' | translate }}</ion-title>
+    
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form *ngIf="form" [formGroup]="form">
+    <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)"/>
+    <div class="profile-image-wrapper" (click)="getPicture()">
+      <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
+        <ion-icon name="add"></ion-icon>
+        <div class="color">
+          {{ 'ITEM_CREATE_CHOOSE_IMAGE' | translate }}
+        </div>
+      </div>
+      <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>
+    </div>
+   
+    <ion-list>
+    
+    <ion-item>
+      <ion-label color="primary" stacked class="font-weight">{{ 'ITEM_CATEGORY_LABEL' | translate }}</ion-label>
+	  <ion-select class="size" placeholder=" Select a category" interface="popover" formControlName="category" okText="Okay" cancelText="Dismiss">
+	    <ion-option *ngFor="let cat of categories"  [value]="cat.VALUE">{{cat.NAME}}</ion-option>
+	  </ion-select>
+	</ion-item>
+	
+	<ion-item>
+	  <ion-label color="primary" stacked class="font-weight">{{ 'ITEM_NAME_LABEL' | translate }}</ion-label>
+      <ion-input type="text" placeholder="{{ 'ITEM_NAME_PLACEHOLDER' | translate }}" formControlName="name"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label color="primary" stacked class="font-weight">{{ 'ITEM_CONDITION_LABEL' | translate }}</ion-label>
+      <ion-input type="text" placeholder="{{ 'ITEM_CONDITION_PLACEHOLDER' | translate }}" formControlName="condition"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label color="primary" stacked class="font-weight">{{ 'ITEM_DESCRIPTION_LABEL' | translate }}</ion-label>
+      <ion-input type="text" placeholder="{{ 'ITEM_DESCRIPTION_PLACEHOLDER' | translate }}" formControlName="description"></ion-input>
+    </ion-item>
+    
+     
+    <div padding >
+      <button  block ion-button color="primary" class="button-padding" (click)="cancel()">   
+          {{ 'CANCEL_BUTTON' | translate }}
+      </button>
+   	  
+      <button block ion-button (click)="done()" class="button-padding" color="primary" [disabled]="!isReadyToSave" strong>        
+          {{ 'DONE_BUTTON' | translate }}
+      </button>
+    </div>
+    
+    </ion-list>
+    
+  </form>
+</ion-content>

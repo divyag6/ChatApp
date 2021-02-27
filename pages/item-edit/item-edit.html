@@ -1,0 +1,80 @@
+<ion-header>
+
+  <ion-navbar secondary>
+    <ion-title>{{ 'ITEM_EDIT_TITLE' | translate }}</ion-title>
+    
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form *ngIf="form" [formGroup]="form">
+    <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)"/>
+    <div class="profile-image-wrapper" (click)="getPicture()">
+      <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
+        <ion-icon name="add"></ion-icon>
+        <div>
+          {{ 'ITEM_CREATE_CHOOSE_IMAGE' | translate }}
+        </div>
+      </div>
+      <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value">
+        <button bottom-right class="edit-button" ion-button small>
+            <div class="font-size">
+              {{ 'ITEM_EDIT_IMAGE' | translate }}
+            </div>
+            <ion-icon left name="image"></ion-icon>     
+        </button>
+      </div>
+    </div>
+   
+    <ion-list>
+    
+    <ion-item>
+    
+	  <ion-label fixed class="font-weight">{{ 'ITEM_CATEGORY_LABEL' | translate }}</ion-label>
+	  <ion-select  interface="popover"  [(ngModel)]="item.category" formControlName="category" okText="Okay" cancelText="Dismiss">
+	    <ion-option *ngFor="let cat of categories"  [value]="cat.VALUE">{{cat.NAME}}</ion-option>
+	  </ion-select>
+	 	
+	</ion-item>
+	 
+	<ion-item>
+	    <ion-label fixed class="font-weight">{{ 'ITEM_NAME_LABEL' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="item.name" formControlName="name"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+        <ion-label class="font-weight" fixed>{{ 'ITEM_CONDITION_LABEL' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="item.condition" formControlName="condition"></ion-input>
+    </ion-item>
+    
+     <ion-item>
+        <ion-label class="font-weight" fixed>{{ 'ITEM_DESCRIPTION_LABEL' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="item.description" formControlName="description"></ion-input>
+    </ion-item>
+    
+     <ion-item>
+        <ion-label color="secondary">{{ 'ITEM_STATUS_LABEL' | translate }} : {{item.adminMsg}}</ion-label>
+    </ion-item>
+  
+     
+     <div padding> 
+        <button  block ion-button color="primary" class="button-padding" (click)="cancel()">   
+          {{ 'CANCEL_BUTTON' | translate }}
+        </button>
+   	   
+      <button block ion-button (click)="done()" class="button-padding"  color="primary" [disabled]="!isReadyToSave" strong>        
+          {{ 'DONE_BUTTON' | translate }}
+      </button>
+      
+        <button  block ion-button color="danger" class="button-padding"  (click)="delete(item)">   
+          {{ 'DELETE_BUTTON' | translate }}
+        </button>
+      </div> 
+   	  
+  
+    </ion-list>
+    
+  </form>
+</ion-content>

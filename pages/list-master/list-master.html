@@ -1,0 +1,42 @@
+<ion-header no-border>
+
+  <ion-navbar>
+ 
+    <button ion-button menuToggle icon-only left>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+   
+    <ion-title>{{ 'LIST_MASTER_TITLE' | translate }}</ion-title>
+    
+    <ion-buttons end>
+      <button ion-button  color="primary" outline (click)="addItem()">
+        {{ 'LIST_MASTER_ADD_ITEM' | translate }}
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of currentItems ">
+      <button ion-item (click)="openItem(item)">
+        <ion-thumbnail small item-left>
+          <img [src]="item.profilePic" />
+        </ion-thumbnail>
+        <h2>{{item.name}}</h2>
+        <h4> {{item.category}} </h4>
+        <p>{{item.description}}</p>
+        
+        <ion-note item-right *ngIf="item.note">{{item.note}}</ion-note>
+      </button>
+
+      <ion-item-options>
+        <button ion-button color="danger" (click)="deleteItem(item.$key)">
+          {{ 'DELETE_BUTTON' | translate }}
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

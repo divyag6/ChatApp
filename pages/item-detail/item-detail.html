@@ -1,0 +1,55 @@
+<ion-header>
+
+  <ion-navbar>
+     <ion-title>{{ item.name }}</ion-title> 
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+
+  <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'">
+  </div>
+
+ <ion-list>
+ 
+ <ion-item >
+  
+	<ion-label fixed class="font-weight">{{ 'ITEM_NAME_LABEL' | translate }}</ion-label>
+	<ion-label>{{item.name}}
+    </ion-label>
+ </ion-item>
+ <ion-item>
+    
+	<ion-label fixed class="font-weight">{{ 'ITEM_CATEGORY_LABEL' | translate }}</ion-label>
+    <ion-label>{{item.category}}
+    </ion-label>   
+ </ion-item>
+ <ion-item>
+ 	<ion-label fixed class="font-weight">{{ 'ITEM_CONDITION_LABEL' | translate }}</ion-label>
+    <ion-label>{{item.condition}}
+    </ion-label>
+  </ion-item>
+ <ion-item>
+        <ion-label class="font-weight" fixed>{{ 'ITEM_DESCRIPTION_LABEL' | translate }}</ion-label>
+        <ion-label>{{item.description}}</ion-label>
+    </ion-item>
+    
+     <ion-item>
+       <ion-label color="secondary">{{ 'ITEM_STATUS_LABEL' | translate }} : {{item.adminMsg}}</ion-label>
+    </ion-item>
+  
+  <div padding>
+        <button  block ion-button color="primary" (click)="edit(item)">   
+          {{ 'EDIT_BUTTON' | translate }}
+        </button>
+  
+      <button block ion-button (click)="openChat(item)" class="button-padding"  color="primary" strong>        
+          {{ 'OPEN_CHAT_BUTTON' | translate }}
+      </button>
+   </div>  
+   
+   </ion-list>
+</ion-content>
